@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Weather Guide Application</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">  
   </head>
 
   <body>
@@ -18,18 +18,21 @@
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="sidebar-sticky pt-4">
             <form>
-              <div class="form-group has-search">
+              <div class="input-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" placeholder="Search your City">
+                <input type="text" class="form-control" placeholder="Search your City" id="city-input">
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-sm btn-outline-dark" id="searchButton">Search</button>
+                  <button type="button" class="btn btn-sm btn-outline-dark" id="clearButton">Clear</button>
+                </div>
               </div>
             </form>
             
-            <ul class="nav flex-column" id="city-list">
-    
+            <ul class="nav flex-column my-4" id="city-list">
               <li>
                 <div class="card mx-1" style="width:auto">
                   <div class="card-body">
-                    <span class="card-title">Card title</span>
+                    <span class="card-title">Title City</span>
                   </div>
                 </div>
               </li>
@@ -37,7 +40,7 @@
               <li>
                 <div class="card mx-1" style="width:auto">
                   <div class="card-body">
-                    <span class="card-title">Card title</span>
+                    <span class="card-title">Title City</span>
                   </div>
                 </div>
               </li>
@@ -47,94 +50,32 @@
           </div>
         </nav>
     
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    
-        <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Clear</button> -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
     
           <div class="card my-4" style="width:auto">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <h2 class="card-title" id="displayCity">City</h3>
+              <p class="card-text">Date: <span id="displayDate">Date</span></p>
+              <p class="card-text">Temperature: <span id="displayTemp"></span> (&#176;F)</p>
+              <p class="card-text">Humidity: <span id="displayHumid"></span> %</p>
+              <p class="card-text">Wind Speed: <span id="displayWindSpeed"></span> MPH</p>
+              <p class="card-text">UV Index: <span id="displayUV"></span></p>
             </div>
           </div>
     
           <h2>5-Day Forecast</h2>
     
-          <div class="row">
-    
-            <div class="card mx-2" style="width:13rem;">
-              <div class="card-body btn-primary rounded">
-                <h5 class="card-title">Card title</h5>
-                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-    
-            <div class="card mx-2" style="width:13rem;">
-              <div class="card-body btn-primary rounded">
-                <h5 class="card-title">Card title</h5>
-                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-    
-            <div class="card mx-2" style="width:13rem;">
-              <div class="card-body btn-primary rounded">
-                <h5 class="card-title">Card title</h5>
-                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-    
-            <div class="card mx-2" style="width:13rem;">
-              <div class="card-body btn-primary rounded">
-                <h5 class="card-title">Card title</h5>
-                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-    
+          <div class="row" id="cityContainer">
+            <!-- Area will populate with 5 day forecast cards-->
           </div>
     
         </main>
       </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/script.js"></script></body>
   </body>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <script src="dashboard.js"></script></body>
-
-  <!-- <body>
-
-    
-    <div class="container">
-    <form>
-        <input type="text" id="city-input" name="city">
-        <input type="submit" id="city-button" value="Submit"><br><br>
-        <button class="button">View Search History</button>
-    </form>  
-
-      <div class="city"></div>
-      <div class="wind"></div>
-      <div class="humidity"></div>
-      <div class="temp"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./assets/script.js"></script>
-  </body> -->
+  
 </html>
